@@ -11,13 +11,17 @@
       background: #f0f0f0;
       color: #333;
       scroll-behavior: smooth;
+      text-align: center; /* ⬅️ makes everything center aligned */
     }
 
     header {
       background-color: #2e7d32;
       color: white;
       padding: 20px;
-      text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
     }
 
     nav a {
@@ -40,8 +44,9 @@
     }
 
     .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 20px;
     }
 
@@ -52,6 +57,7 @@
       overflow: hidden;
       text-align: center;
       padding: 10px;
+      width: 250px;
     }
 
     .product-card img {
@@ -70,7 +76,8 @@
 
     .buttons {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      gap: 10px;
       padding: 10px;
     }
 
@@ -83,12 +90,18 @@
       cursor: pointer;
     }
 
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
     form input, form select, form button {
-      display: block;
       width: 100%;
       max-width: 400px;
-      margin: 10px 0;
       padding: 10px;
+      text-align: center;
     }
 
     form button {
@@ -109,34 +122,13 @@
       padding: 10px;
     }
 
-    /* Center align special sections */
-    #home, #order, #return {
-      text-align: center;
-    }
-
-    /* Center forms */
-    #order-form, #return-form {
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #order-form input, 
-    #order-form select, 
-    #order-form button,
-    #return-form input,
-    #return-form button {
-      text-align: center;
-    }
-
     /* Fullscreen confirmation */
     #order-fullscreen-confirm {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: white;
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
       flex-direction: column;
@@ -169,9 +161,7 @@
 
     <section id="products">
       <h3>Our Collection</h3>
-      <div class="products" id="product-list">
-        <!-- JS loads products here -->
-      </div>
+      <div class="products" id="product-list"></div>
     </section>
 
     <section id="wishlist">
@@ -199,7 +189,6 @@
         </select>
         <button type="submit">Place Order</button>
       </form>
-      <p id="order-confirm" class="hidden">✅ Order placed successfully!</p>
     </section>
 
     <section id="return">
@@ -218,8 +207,8 @@
     <p>© 2025 Sustainable Fashion Boutique | Designed for College Project</p>
   </footer>
 
-  <!-- Fullscreen confirmation message -->
-  <div id="order-fullscreen-confirm" class="hidden">
+  <!-- Fullscreen confirmation -->
+  <div id="order-fullscreen-confirm">
     ✅ Your Order is Confirmed!  
     <p style="font-size:1.2rem;">Thank you for shopping sustainably 🌿</p>
   </div>
@@ -228,16 +217,7 @@
     const products = [
       { name: "Eco-Friendly Summer Dress", price: "₹1200", image: "https://i.imgur.com/XaJkp7M.jpg" },
       { name: "Organic Cotton Tote Bag", price: "₹450", image: "https://i.imgur.com/ZCbgWaN.jpg" },
-      { name: "Recycled Plastic Sneakers", price: "₹2500", image: "https://i.imgur.com/Yz5KeGf.jpg" },
-      { name: "Upcycled Denim Jacket", price: "₹1700", image: "https://i.imgur.com/FK9Wq6v.jpg" },
-      { name: "Organic Linen Shirt", price: "₹1450", image: "https://i.imgur.com/EM94NMQ.jpg" },
-      { name: "Eco Sunglasses", price: "₹950", image: "https://i.imgur.com/Yhw7EOc.jpg" },
-      { name: "Hemp Fabric Kurta", price: "₹1600", image: "https://i.imgur.com/BPr4Iny.jpg" },
-      { name: "Recycled Canvas Backpack", price: "₹2200", image: "https://i.imgur.com/oWIJtGf.jpg" },
-      { name: "Bamboo Fiber Scarf", price: "₹800", image: "https://i.imgur.com/V3AvCDx.jpg" },
-      { name: "Organic Cotton Hoodie", price: "₹1900", image: "https://i.imgur.com/9QKkE0T.jpg" },
-      { name: "Eco-Friendly Leather Wallet", price: "₹1100", image: "https://i.imgur.com/vAnrJzn.jpg" },
-      { name: "Handmade Jute Sandals", price: "₹1350", image: "https://i.imgur.com/U7QZ48o.jpg" }
+      { name: "Recycled Plastic Sneakers", price: "₹2500", image: "https://i.imgur.com/Yz5KeGf.jpg" }
     ];
 
     let cart = [];
@@ -268,69 +248,31 @@
     function addToCart(productName) {
       if (!cart.includes(productName)) {
         cart.push(productName);
-        updateCartCount();
+        document.getElementById('cart-count').textContent = cart.length;
         alert(`${productName} added to cart.`);
-      } else {
-        alert(`${productName} is already in cart.`);
       }
-    }
-
-    function updateCartCount() {
-      document.getElementById('cart-count').textContent = cart.length;
     }
 
     function addToWishlist(productName) {
       if (!wishlist.includes(productName)) {
         wishlist.push(productName);
-        updateWishlistCount();
-        renderWishlist();
-        alert(`${productName} added to wishlist.`);
-      } else {
-        alert(`${productName} is already in wishlist.`);
+        document.getElementById('wishlist-count').textContent = wishlist.length;
       }
-    }
-
-    function updateWishlistCount() {
-      document.getElementById('wishlist-count').textContent = wishlist.length;
-    }
-
-    function renderWishlist() {
-      const wishlistContainer = document.getElementById("wishlist-items");
-      wishlistContainer.innerHTML = "";
-
-      if (wishlist.length === 0) {
-        document.getElementById("wishlist-empty").style.display = "block";
-        return;
-      }
-
-      document.getElementById("wishlist-empty").style.display = "none";
-
-      wishlist.forEach(name => {
-        const product = products.find(p => p.name === name);
-        const card = document.createElement("div");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" />
-          <h4>${product.name}</h4>
-          <p>${product.price}</p>
-        `;
-        wishlistContainer.appendChild(card);
-      });
     }
 
     document.getElementById("order-form").addEventListener("submit", function(e) {
       e.preventDefault();
-      document.getElementById("order-confirm").classList.remove("hidden");
-      this.reset();
-      document.getElementById("order-product").value = "";
 
-      // Fullscreen confirmation
       const confirmScreen = document.getElementById("order-fullscreen-confirm");
-      confirmScreen.classList.remove("hidden");
+      confirmScreen.style.display = "flex";
 
       setTimeout(() => {
-        confirmScreen.classList.add("hidden");
+        confirmScreen.style.display = "none";
+        document.getElementById("home").scrollIntoView({ behavior: "smooth" });
       }, 5000);
+
+      this.reset();
+      document.getElementById("order-product").value = "";
     });
 
     document.getElementById("return-form").addEventListener("submit", function(e) {
