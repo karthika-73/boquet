@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sustainable Fashion Boutique</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>🌿 Sustainable Fashion Boutique</h1>
+    <p>Eco-friendly, upcycled & recycled fashion for a better world</p>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About</a>
+      <a href="#">Return</a>
+      <span>🛒 Cart (0) | ❤️ Wishlist (0)</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2>Welcome to Our Boutique</h2>
+      <p>Discover our latest collection of sustainable fashion items that never go out of style.</p>
+    </section>
+
+    <section class="collection">
+      <h3>Our Collection</h3>
+      <div class="filters">
+        <select>
+          <option>All Categories</option>
+          <option>Dresses</option>
+          <option>Bags</option>
+          <option>Shoes</option>
+        </select>
+      </div>
+
+      <div class="products" id="product-list">
+        <!-- Products will be rendered here using JavaScript -->
+      </div>
+    </section>
+
+    <section class="wishlist">
+      <h3>My Wishlist</h3>
+      <p id="wishlist-msg">Wishlist is empty</p>
+    </section>
+
+    <section class="about">
+      <h3>About Us</h3>
+      <p>Our boutique is committed to reducing fashion waste and promoting eco-friendly choices.</p>
+    </section>
+
+    <section class="order">
+      <h3>Place Your Order</h3>
+      <form id="order-form">
+        <input type="text" placeholder="Product Name" required />
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Phone Number" required />
+        <select required>
+          <option value="">Select Payment Method</option>
+          <option>Cash on Delivery</option>
+          <option>UPI</option>
+        </select>
+        <button type="submit">Place Order</button>
+      </form>
+    </section>
+
+    <section class="return">
+      <h3>Return for Recycling</h3>
+      <form id="return-form">
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Phone Number" required />
+        <input type="text" placeholder="Product Details" required />
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Sustainable Fashion Boutique | Designed for College Project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
