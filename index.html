@@ -11,7 +11,7 @@
       background: #f0f0f0;
       color: #333;
       scroll-behavior: smooth;
-      text-align: center; /* ⬅️ makes everything center aligned */
+      text-align: center;
     }
 
     header {
@@ -122,7 +122,6 @@
       padding: 10px;
     }
 
-    /* Fullscreen confirmation */
     #order-fullscreen-confirm {
       position: fixed;
       top: 0; left: 0;
@@ -207,7 +206,6 @@
     <p>© 2025 Sustainable Fashion Boutique | Designed for College Project</p>
   </footer>
 
-  <!-- Fullscreen confirmation -->
   <div id="order-fullscreen-confirm">
     ✅ Your Order is Confirmed!  
     <p style="font-size:1.2rem;">Thank you for shopping sustainably 🌿</p>
@@ -215,67 +213,19 @@
 
   <script>
     const products = [
-  {
-    name: "Eco-friendly Summer Dress",
-    price: 1200,
-    img: "https://images.pexels.com/photos/3827311/pexels-photo-3827311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Organic Cotton Tote Bag",
-    price: 500,
-    img: "https://images.pexels.com/photos/930934/pexels-photo-930934.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Upcycled Denim Jacket",
-    price: 1500,
-    img: "https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Recycled Plastic Sneakers",
-    price: 2000,
-    img: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Handmade Bamboo Hat",
-    price: 700,
-    img: "https://images.pexels.com/photos/4351704/pexels-photo-4351704.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Vegan Leather Backpack",
-    price: 1800,
-    img: "https://images.pexels.com/photos/6351183/pexels-photo-6351183.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Organic Wool Scarf",
-    price: 600,
-    img: "https://images.pexels.com/photos/5480695/pexels-photo-5480695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Sustainable Sandals",
-    price: 900,
-    img: "https://images.pexels.com/photos/4147261/pexels-photo-4147261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Upcycled Skirt",
-    price: 1000,
-    img: "https://images.pexels.com/photos/5450843/pexels-photo-5450843.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Eco Sunglasses",
-    price: 750,
-    img: "https://images.pexels.com/photos/102223/pexels-photo-102223.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Recycled Paper Notebook",
-    price: 350,
-    img: "https://images.pexels.com/photos/554751/pexels-photo-554751.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  },
-  {
-    name: "Organic Linen Shirt",
-    price: 1300,
-    img: "https://images.pexels.com/photos/825457/pexels-photo-825457.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  }
-];
+      { name: "Eco-friendly Summer Dress", price: 1200, img: "https://images.pexels.com/photos/3827311/pexels-photo-3827311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Organic Cotton Tote Bag", price: 500, img: "https://images.pexels.com/photos/930934/pexels-photo-930934.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Upcycled Denim Jacket", price: 1500, img: "https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Recycled Plastic Sneakers", price: 2000, img: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Handmade Bamboo Hat", price: 700, img: "https://images.pexels.com/photos/4351704/pexels-photo-4351704.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Vegan Leather Backpack", price: 1800, img: "https://images.pexels.com/photos/6351183/pexels-photo-6351183.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Organic Wool Scarf", price: 600, img: "https://images.pexels.com/photos/5480695/pexels-photo-5480695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Sustainable Sandals", price: 900, img: "https://images.pexels.com/photos/4147261/pexels-photo-4147261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Upcycled Skirt", price: 1000, img: "https://images.pexels.com/photos/5450843/pexels-photo-5450843.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Eco Sunglasses", price: 750, img: "https://images.pexels.com/photos/102223/pexels-photo-102223.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Recycled Paper Notebook", price: 350, img: "https://images.pexels.com/photos/554751/pexels-photo-554751.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
+      { name: "Organic Linen Shirt", price: 1300, img: "https://images.pexels.com/photos/825457/pexels-photo-825457.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" }
+    ];
 
     let cart = [];
     let wishlist = [];
@@ -285,15 +235,15 @@
       const card = document.createElement('div');
       card.className = 'product-card';
       card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" />
+        <img src="${product.img}" alt="${product.name}" />
         <h4>${product.name}</h4>
-        <p>${product.price}</p>
+        <p>₹${product.price}</p>
         <div class="buttons">
           <button onclick="addToCart('${product.name}')">Add to Cart</button>
           <button onclick="addToWishlist('${product.name}')">Wishlist</button>
           <button onclick="buyNow('${product.name}')">Buy Now</button>
         </div>
-      ;
+      `;
       productList.appendChild(card);
     });
 
@@ -319,15 +269,12 @@
 
     document.getElementById("order-form").addEventListener("submit", function(e) {
       e.preventDefault();
-
       const confirmScreen = document.getElementById("order-fullscreen-confirm");
       confirmScreen.style.display = "flex";
-
       setTimeout(() => {
         confirmScreen.style.display = "none";
         document.getElementById("home").scrollIntoView({ behavior: "smooth" });
       }, 5000);
-
       this.reset();
       document.getElementById("order-product").value = "";
     });
