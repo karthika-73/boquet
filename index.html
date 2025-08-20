@@ -109,27 +109,40 @@
       padding: 10px;
     }
 
-    /* Fullscreen Confirmation Page */
-    #confirmation-page {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #4caf50, #2e7d32);
-      color: white;
+    /* Center align special sections */
+    #home, #order, #return {
+      text-align: center;
+    }
+
+    /* Center forms */
+    #order-form, #return-form {
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      z-index: 9999;
-      text-align: center;
-      display: none;
     }
-    #confirmation-page h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
+
+    #order-form input, 
+    #order-form select, 
+    #order-form button,
+    #return-form input,
+    #return-form button {
+      text-align: center;
+    }
+
+    /* Fullscreen confirmation */
+    #order-fullscreen-confirm {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 2rem;
+      color: #2e7d32;
+      z-index: 9999;
     }
   </style>
 </head>
@@ -179,13 +192,14 @@
         <input type="text" id="order-product" placeholder="Product Name" required readonly />
         <input type="text" placeholder="Your Name" required />
         <input type="text" placeholder="Phone Number" required />
-        <select id="payment-method" required>
+        <select required>
           <option value="">Select Payment Method</option>
           <option>Cash on Delivery</option>
           <option>UPI</option>
         </select>
         <button type="submit">Place Order</button>
       </form>
+      <p id="order-confirm" class="hidden">✅ Order placed successfully!</p>
     </section>
 
     <section id="return">
@@ -204,10 +218,10 @@
     <p>© 2025 Sustainable Fashion Boutique | Designed for College Project</p>
   </footer>
 
-  <!-- Full Screen Confirmation Page -->
-  <div id="confirmation-page">
-    <h1>✅ Your Order is Confirmed!</h1>
-    <p id="confirmation-details"></p>
+  <!-- Fullscreen confirmation message -->
+  <div id="order-fullscreen-confirm" class="hidden">
+    ✅ Your Order is Confirmed!  
+    <p style="font-size:1.2rem;">Thank you for shopping sustainably 🌿</p>
   </div>
 
   <script>
@@ -306,22 +320,17 @@
 
     document.getElementById("order-form").addEventListener("submit", function(e) {
       e.preventDefault();
-      const productName = document.getElementById("order-product").value;
-      const payment = document.getElementById("payment-method").value;
-
-      // Show confirmation page
-      document.getElementById("confirmation-details").textContent =
-        `Product: ${productName} | Payment: ${payment}`;
-      document.getElementById("confirmation-page").style.display = "flex";
-
-      // Hide after 5 seconds
-      setTimeout(() => {
-        document.getElementById("confirmation-page").style.display = "none";
-      }, 5000);
-
-      // Reset form
+      document.getElementById("order-confirm").classList.remove("hidden");
       this.reset();
       document.getElementById("order-product").value = "";
+
+      // Fullscreen confirmation
+      const confirmScreen = document.getElementById("order-fullscreen-confirm");
+      confirmScreen.classList.remove("hidden");
+
+      setTimeout(() => {
+        confirmScreen.classList.add("hidden");
+      }, 5000);
     });
 
     document.getElementById("return-form").addEventListener("submit", function(e) {
