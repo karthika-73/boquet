@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #2e7d32, #4caf50);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 15px; }
+    p { font-size: 1.2rem; }
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 15px;
+      background: white;
+      color: #2e7d32;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>✅ Your Order is Confirmed!</h1>
+    <p id="order-details">Product: ... | Payment: ...</p>
+    <p>Redirecting back in 5 seconds...</p>
+    <a href="index.html#home">Continue Shopping</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get("product") || "Unknown Product";
+    const payment = params.get("payment") || "COD";
+    document.getElementById("order-details").innerText =
+      `Product: ${product} | Payment: ${payment}`;
+
+    setTimeout(() => {
+      window.location.href = "index.html#home";
+    }, 5000);
+  </script>
+</body>
+</html>
