@@ -1,26 +1,23 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f7f7f7;
+  background: #f0f0f0;
   color: #333;
+  scroll-behavior: smooth;
 }
 
 header {
-  background-color: #3c984c;
+  background-color: #2e7d32;
   color: white;
   padding: 20px;
   text-align: center;
 }
 
-header nav {
-  margin-top: 10px;
-}
-
-header nav a {
+nav a {
+  margin: 0 10px;
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+  font-weight: bold;
 }
 
 main {
@@ -28,80 +25,79 @@ main {
 }
 
 section {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 h2, h3 {
-  color: #2d6a3c;
-}
-
-.filters select {
-  padding: 8px;
-  margin-bottom: 20px;
+  color: #2e7d32;
 }
 
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
 .product-card {
-  background-color: white;
+  background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   overflow: hidden;
   text-align: center;
+  padding: 10px;
 }
 
 .product-card img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
 }
 
 .product-card h4 {
-  margin: 10px 0;
+  margin: 10px 0 5px;
 }
 
 .product-card p {
   font-weight: bold;
-  margin: 5px 0;
 }
 
-.product-card .buttons {
+.buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 10px;
 }
 
 .product-card button {
-  padding: 6px 10px;
-  background-color: #3c984c;
+  background-color: #2e7d32;
   color: white;
   border: none;
+  padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
 }
 
 form input, form select, form button {
   display: block;
-  margin: 10px 0;
-  padding: 10px;
   width: 100%;
   max-width: 400px;
+  margin: 10px 0;
+  padding: 10px;
 }
 
 form button {
-  background-color: #3c984c;
+  background-color: #2e7d32;
   color: white;
   border: none;
   cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}
+
 footer {
-  background-color: #2e6a36;
+  background-color: #1b5e20;
   color: white;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px;
 }
