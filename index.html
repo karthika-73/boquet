@@ -4,7 +4,111 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sustainable Fashion Boutique</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #f0f0f0;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2, h3 {
+      color: #2e7d32;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card h4 {
+      margin: 10px 0 5px;
+    }
+
+    .product-card p {
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+
+    .product-card button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form input, form select, form button {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    form button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,28 +120,37 @@
       <a href="#products">Products</a>
       <a href="#about">About</a>
       <a href="#return">Return</a>
+      <a href="#wishlist">❤️ Wishlist (<span id="wishlist-count">0</span>)</a>
+      <span>🛒 Cart (<span id="cart-count">0</span>)</span>
     </nav>
   </header>
 
   <main>
-    <section id="home" class="welcome">
+    <section id="home">
       <h2>Welcome to Our Boutique</h2>
       <p>Discover stylish sustainable fashion made with love for the planet.</p>
     </section>
 
-    <section id="products" class="collection">
+    <section id="products">
       <h3>Our Collection</h3>
       <div class="products" id="product-list">
-        <!-- JS will load products here -->
+        <!-- JS loads products here -->
       </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="wishlist">
+      <h3>My Wishlist</h3>
+      <div id="wishlist-items" class="products">
+        <p id="wishlist-empty">Your wishlist is empty.</p>
+      </div>
+    </section>
+
+    <section id="about">
       <h3>About Us</h3>
       <p>We are committed to reducing fashion waste and creating eco-conscious clothing choices for all. Join us in making fashion green again.</p>
     </section>
 
-    <section id="order" class="order">
+    <section id="order">
       <h3>Place Your Order</h3>
       <form id="order-form">
         <input type="text" id="order-product" placeholder="Product Name" required readonly />
@@ -53,7 +166,7 @@
       <p id="order-confirm" class="hidden">✅ Order placed successfully!</p>
     </section>
 
-    <section id="return" class="return">
+    <section id="return">
       <h3>Return for Recycling</h3>
       <form id="return-form">
         <input type="text" placeholder="Your Name" required />
@@ -69,6 +182,83 @@
     <p>© 2025 Sustainable Fashion Boutique | Designed for College Project</p>
   </footer>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <script>
+    const products = [
+      { name: "Eco-Friendly Summer Dress", price: "₹1200", image: "https://i.imgur.com/XaJkp7M.jpg" },
+      { name: "Organic Cotton Tote Bag", price: "₹450", image: "https://i.imgur.com/ZCbgWaN.jpg" },
+      { name: "Recycled Plastic Sneakers", price: "₹2500", image: "https://i.imgur.com/Yz5KeGf.jpg" },
+      { name: "Upcycled Denim Jacket", price: "₹1700", image: "https://i.imgur.com/FK9Wq6v.jpg" },
+      { name: "Organic Linen Shirt", price: "₹1450", image: "https://i.imgur.com/EM94NMQ.jpg" },
+      { name: "Eco Sunglasses", price: "₹950", image: "https://i.imgur.com/Yhw7EOc.jpg" }
+    ];
+
+    let cart = [];
+    let wishlist = [];
+
+    const productList = document.getElementById('product-list');
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h4>${product.name}</h4>
+        <p>${product.price}</p>
+        <div class="buttons">
+          <button onclick="addToCart('${product.name}')">Add to Cart</button>
+          <button onclick="addToWishlist('${product.name}')">Wishlist</button>
+          <button onclick="buyNow('${product.name}')">Buy Now</button>
+        </div>
+      `;
+      productList.appendChild(card);
+    });
+
+    function buyNow(productName) {
+      document.getElementById('order-product').value = productName;
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function addToCart(productName) {
+      if (!cart.includes(productName)) {
+        cart.push(productName);
+        updateCartCount();
+        alert(`${productName} added to cart.`);
+      } else {
+        alert(`${productName} is already in cart.`);
+      }
+    }
+
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    function addToWishlist(productName) {
+      if (!wishlist.includes(productName)) {
+        wishlist.push(productName);
+        updateWishlistCount();
+        renderWishlist();
+        alert(`${productName} added to wishlist.`);
+      } else {
+        alert(`${productName} is already in wishlist.`);
+      }
+    }
+
+    function updateWishlistCount() {
+      document.getElementById('wishlist-count').textContent = wishlist.length;
+    }
+
+    function renderWishlist() {
+      const wishlistContainer = document.getElementById("wishlist-items");
+      wishlistContainer.innerHTML = "";
+
+      if (wishlist.length === 0) {
+        document.getElementById("wishlist-empty").style.display = "block";
+        return;
+      }
+
+      document.getElementById("wishlist-empty").style.display = "none";
+
+      wishlist.forEach(name => {
+        const product = products.find(p => p.name === name);
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.inner
