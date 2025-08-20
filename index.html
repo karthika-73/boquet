@@ -1,106 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sustainable Fashion Boutique</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: #2e7d32; color: white; padding: 15px; text-align: center; }
-    nav { display: flex; justify-content: center; gap: 20px; background: #388e3c; padding: 10px; }
-    nav a { color: white; text-decoration: none; font-weight: bold; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
-    .product { border: 1px solid #ccc; border-radius: 10px; padding: 15px; text-align: center; background: #f9f9f9; }
-    .product img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-    button { margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
-    .cart, .wishlist, .order, .confirmation { padding: 20px; }
-    .hidden { display: none; }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #f0f0f0;
+      color: #333;
+      scroll-behavior: smooth;
+    }
 
-    /* Confirmation Page Style */
-    .confirmation {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #2e7d32, #4caf50);
+    header {
+      background-color: #2e7d32;
       color: white;
+      padding: 20px;
       text-align: center;
-      flex-direction: column;
     }
-    .confirmation-box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
-    .confirmation h1 { font-size: 2.5rem; margin-bottom: 15px; }
-    .confirmation p { font-size: 1.2rem; }
-    .confirmation a {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 15px;
-      background: white;
-      color: #2e7d32;
-      border-radius: 8px;
+
+    nav a {
+      margin: 0 10px;
+      color: white;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2, h3 {
+      color: #2e7d32;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card h4 {
+      margin: 10px 0 5px;
+    }
+
+    .product-card p {
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+
+    .product-card button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form input, form select, form button {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    form button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Fullscreen Confirmation Page */
+    #confirmation-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      z-index: 9999;
+      text-align: center;
+      display: none;
+    }
+    #confirmation-page h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>🌿 Sustainable Fashion Boutique</h1>
+    <p>Eco-friendly, upcycled & recycled fashion for a better world</p>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#return">Return</a>
+      <a href="#wishlist">❤️ Wishlist (<span id="wishlist-count">0</span>)</a>
+      <span>🛒 Cart (<span id="cart-count">0</span>)</span>
+    </nav>
   </header>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#cart">Cart</a>
-    <a href="#wishlist">Wishlist</a>
-    <a href="#order">Order</a>
-  </nav>
+  <main>
+    <section id="home">
+      <h2>Welcome to Our Boutique</h2>
+      <p>Discover stylish sustainable fashion made with love for the planet.</p>
+    </section>
 
-  <!-- Products Section -->
-  <section id="home" class="products"></section>
+    <section id="products">
+      <h3>Our Collection</h3>
+      <div class="products" id="product-list">
+        <!-- JS loads products here -->
+      </div>
+    </section>
 
-  <!-- Cart Section -->
-  <section id="cart" class="cart hidden">
-    <h2>Your Cart</h2>
-    <ul id="cart-items"></ul>
-  </section>
+    <section id="wishlist">
+      <h3>My Wishlist</h3>
+      <div id="wishlist-items" class="products">
+        <p id="wishlist-empty">Your wishlist is empty.</p>
+      </div>
+    </section>
 
-  <!-- Wishlist Section -->
-  <section id="wishlist" class="wishlist hidden">
-    <h2>Your Wishlist</h2>
-    <ul id="wishlist-items"></ul>
-  </section>
+    <section id="about">
+      <h3>About Us</h3>
+      <p>We are committed to reducing fashion waste and creating eco-conscious clothing choices for all. Join us in making fashion green again.</p>
+    </section>
 
-  <!-- Order Section -->
-  <section id="order" class="order hidden">
-    <h2>Place Your Order</h2>
-    <form id="order-form">
-      <label>Product:
-        <input type="text" id="order-product" readonly required>
-      </label><br><br>
-      <label>Payment:
+    <section id="order">
+      <h3>Place Your Order</h3>
+      <form id="order-form">
+        <input type="text" id="order-product" placeholder="Product Name" required readonly />
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Phone Number" required />
         <select id="payment-method" required>
-          <option value="COD">Cash on Delivery</option>
-          <option value="UPI">UPI</option>
-          <option value="Card">Credit/Debit Card</option>
+          <option value="">Select Payment Method</option>
+          <option>Cash on Delivery</option>
+          <option>UPI</option>
         </select>
-      </label><br><br>
-      <button type="submit">Confirm Order</button>
-    </form>
-  </section>
+        <button type="submit">Place Order</button>
+      </form>
+    </section>
 
-  <!-- Confirmation Section -->
-  <section id="confirmation" class="confirmation hidden">
-    <div class="confirmation-box">
-      <h1>✅ Your Order is Confirmed!</h1>
-      <p id="order-details">Product: ... | Payment: ...</p>
-      <p>Redirecting back in 5 seconds...</p>
-      <a href="#home" onclick="showSection('home')">Continue Shopping</a>
-    </div>
-  </section>
+    <section id="return">
+      <h3>Return for Recycling</h3>
+      <form id="return-form">
+        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Phone Number" required />
+        <input type="text" placeholder="Product Details" required />
+        <button type="submit">Send</button>
+      </form>
+      <p id="return-confirm" class="hidden">♻️ Return request submitted!</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Sustainable Fashion Boutique | Designed for College Project</p>
+  </footer>
+
+  <!-- Full Screen Confirmation Page -->
+  <div id="confirmation-page">
+    <h1>✅ Your Order is Confirmed!</h1>
+    <p id="confirmation-details"></p>
+  </div>
 
   <script>
     const products = [
@@ -110,92 +218,117 @@
       { name: "Upcycled Denim Jacket", price: "₹1700", image: "https://i.imgur.com/FK9Wq6v.jpg" },
       { name: "Organic Linen Shirt", price: "₹1450", image: "https://i.imgur.com/EM94NMQ.jpg" },
       { name: "Eco Sunglasses", price: "₹950", image: "https://i.imgur.com/Yhw7EOc.jpg" },
-      { name: "Hemp Fabric Kurta", price: "₹1600", image: "https://i.imgur.com/Y0Hk3sF.jpg" },
-      { name: "Recycled Canvas Backpack", price: "₹2200", image: "https://i.imgur.com/vCjLW8O.jpg" },
-      { name: "Bamboo Fiber Scarf", price: "₹800", image: "https://i.imgur.com/uITGVWJ.jpg" },
-      { name: "Organic Cotton Hoodie", price: "₹1900", image: "https://i.imgur.com/13G8wkh.jpg" },
-      { name: "Eco-Friendly Leather Wallet", price: "₹1100", image: "https://i.imgur.com/6Lt6xYQ.jpg" },
-      { name: "Handmade Jute Sandals", price: "₹1350", image: "https://i.imgur.com/ntM54eP.jpg" }
+      { name: "Hemp Fabric Kurta", price: "₹1600", image: "https://i.imgur.com/BPr4Iny.jpg" },
+      { name: "Recycled Canvas Backpack", price: "₹2200", image: "https://i.imgur.com/oWIJtGf.jpg" },
+      { name: "Bamboo Fiber Scarf", price: "₹800", image: "https://i.imgur.com/V3AvCDx.jpg" },
+      { name: "Organic Cotton Hoodie", price: "₹1900", image: "https://i.imgur.com/9QKkE0T.jpg" },
+      { name: "Eco-Friendly Leather Wallet", price: "₹1100", image: "https://i.imgur.com/vAnrJzn.jpg" },
+      { name: "Handmade Jute Sandals", price: "₹1350", image: "https://i.imgur.com/U7QZ48o.jpg" }
     ];
 
     let cart = [];
     let wishlist = [];
 
-    const productsContainer = document.getElementById("home");
-    products.forEach((p, i) => {
-      productsContainer.innerHTML += `
-        <div class="product">
-          <img src="${p.image}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>${p.price}</p>
-          <button onclick="addToCart(${i})">Add to Cart</button>
-          <button onclick="addToWishlist(${i})">❤️ Wishlist</button>
-          <button onclick="placeOrder('${p.name}')">🛒 Buy Now</button>
+    const productList = document.getElementById('product-list');
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h4>${product.name}</h4>
+        <p>${product.price}</p>
+        <div class="buttons">
+          <button onclick="addToCart('${product.name}')">Add to Cart</button>
+          <button onclick="addToWishlist('${product.name}')">Wishlist</button>
+          <button onclick="buyNow('${product.name}')">Buy Now</button>
         </div>
       `;
+      productList.appendChild(card);
     });
 
-    function showSection(id) {
-      document.querySelectorAll("section").forEach(sec => sec.classList.add("hidden"));
-      document.getElementById(id).classList.remove("hidden");
+    function buyNow(productName) {
+      document.getElementById('order-product').value = productName;
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
     }
 
-    window.addEventListener("hashchange", () => {
-      const hash = window.location.hash.substring(1);
-      if (hash) showSection(hash);
-      else showSection("home");
-    });
-
-    function addToCart(i) {
-      cart.push(products[i]);
-      updateCart();
-      window.location.hash = "cart";
+    function addToCart(productName) {
+      if (!cart.includes(productName)) {
+        cart.push(productName);
+        updateCartCount();
+        alert(`${productName} added to cart.`);
+      } else {
+        alert(`${productName} is already in cart.`);
+      }
     }
 
-    function updateCart() {
-      const cartList = document.getElementById("cart-items");
-      cartList.innerHTML = cart.map(item => `<li>${item.name} - ${item.price}</li>`).join("");
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.length;
     }
 
-    function addToWishlist(i) {
-      wishlist.push(products[i]);
-      updateWishlist();
-      window.location.hash = "wishlist";
+    function addToWishlist(productName) {
+      if (!wishlist.includes(productName)) {
+        wishlist.push(productName);
+        updateWishlistCount();
+        renderWishlist();
+        alert(`${productName} added to wishlist.`);
+      } else {
+        alert(`${productName} is already in wishlist.`);
+      }
     }
 
-    function updateWishlist() {
-      const wishList = document.getElementById("wishlist-items");
-      wishList.innerHTML = wishlist.map(item => `<li>${item.name} - ${item.price}</li>`).join("");
+    function updateWishlistCount() {
+      document.getElementById('wishlist-count').textContent = wishlist.length;
     }
 
-    function placeOrder(productName) {
-      document.getElementById("order-product").value = productName;
-      window.location.hash = "order";
+    function renderWishlist() {
+      const wishlistContainer = document.getElementById("wishlist-items");
+      wishlistContainer.innerHTML = "";
+
+      if (wishlist.length === 0) {
+        document.getElementById("wishlist-empty").style.display = "block";
+        return;
+      }
+
+      document.getElementById("wishlist-empty").style.display = "none";
+
+      wishlist.forEach(name => {
+        const product = products.find(p => p.name === name);
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <h4>${product.name}</h4>
+          <p>${product.price}</p>
+        `;
+        wishlistContainer.appendChild(card);
+      });
     }
 
     document.getElementById("order-form").addEventListener("submit", function(e) {
       e.preventDefault();
-      const product = document.getElementById("order-product").value;
+      const productName = document.getElementById("order-product").value;
       const payment = document.getElementById("payment-method").value;
 
       // Show confirmation page
-      document.getElementById("order-details").innerText =
-        `Product: ${product} | Payment: ${payment}`;
-      showSection("confirmation");
+      document.getElementById("confirmation-details").textContent =
+        `Product: ${productName} | Payment: ${payment}`;
+      document.getElementById("confirmation-page").style.display = "flex";
 
-      // Auto redirect after 5s
+      // Hide after 5 seconds
       setTimeout(() => {
-        window.location.hash = "home";
-        showSection("home");
+        document.getElementById("confirmation-page").style.display = "none";
       }, 5000);
 
-      // Clear cart after order
-      cart = [];
-      updateCart();
+      // Reset form
+      this.reset();
+      document.getElementById("order-product").value = "";
     });
 
-    // Show home by default
-    showSection("home");
+    document.getElementById("return-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("return-confirm").classList.remove("hidden");
+      this.reset();
+    });
   </script>
 </body>
 </html>
