@@ -189,7 +189,14 @@
       { name: "Recycled Plastic Sneakers", price: "₹2500", image: "https://i.imgur.com/Yz5KeGf.jpg" },
       { name: "Upcycled Denim Jacket", price: "₹1700", image: "https://i.imgur.com/FK9Wq6v.jpg" },
       { name: "Organic Linen Shirt", price: "₹1450", image: "https://i.imgur.com/EM94NMQ.jpg" },
-      { name: "Eco Sunglasses", price: "₹950", image: "https://i.imgur.com/Yhw7EOc.jpg" }
+      { name: "Eco Sunglasses", price: "₹950", image: "https://i.imgur.com/Yhw7EOc.jpg" },
+
+      { name: "Hemp Fabric Kurta", price: "₹1600", image: "https://i.imgur.com/Y0Hk3sF.jpg" },
+      { name: "Recycled Canvas Backpack", price: "₹2200", image: "https://i.imgur.com/vCjLW8O.jpg" },
+      { name: "Bamboo Fiber Scarf", price: "₹800", image: "https://i.imgur.com/uITGVWJ.jpg" },
+      { name: "Organic Cotton Hoodie", price: "₹1900", image: "https://i.imgur.com/13G8wkh.jpg" },
+      { name: "Eco-Friendly Leather Wallet", price: "₹1100", image: "https://i.imgur.com/6Lt6xYQ.jpg" },
+      { name: "Handmade Jute Sandals", price: "₹1350", image: "https://i.imgur.com/ntM54eP.jpg" }
     ];
 
     let cart = [];
@@ -261,4 +268,27 @@
         const product = products.find(p => p.name === name);
         const card = document.createElement("div");
         card.className = "product-card";
-        card.inner
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <h4>${product.name}</h4>
+          <p>${product.price}</p>
+        `;
+        wishlistContainer.appendChild(card);
+      });
+    }
+
+    document.getElementById("order-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("order-confirm").classList.remove("hidden");
+      this.reset();
+      document.getElementById("order-product").value = "";
+    });
+
+    document.getElementById("return-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("return-confirm").classList.remove("hidden");
+      this.reset();
+    });
+  </script>
+</body>
+</html>
