@@ -31,8 +31,12 @@ const products = [
   }
 ];
 
-const productList = document.getElementById('product-list');
+// Cart and Wishlist Arrays
+let cart = [];
+let wishlist = [];
 
+// Render products
+const productList = document.getElementById('product-list');
 products.forEach(product => {
   const card = document.createElement('div');
   card.className = 'product-card';
@@ -41,28 +45,67 @@ products.forEach(product => {
     <h4>${product.name}</h4>
     <p>${product.price}</p>
     <div class="buttons">
+      <button onclick="addToCart('${product.name}')">Add to Cart</button>
+      <button onclick="addToWishlist('${product.name}')">Wishlist</button>
       <button onclick="buyNow('${product.name}')">Buy Now</button>
     </div>
   `;
   productList.appendChild(card);
 });
 
-// Buy Now logic
+// Buy Now function
 function buyNow(productName) {
   document.getElementById('order-product').value = productName;
   document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
 }
 
+// Add to Cart function
+function addToCart(productName) {
+  if (!cart.includes(productName)) {
+    cart.push(productName);
+    updateCartCount();
+    alert(`${productName} added to cart.`);
+  } else {
+    alert(`${productName} is already in cart.`);
+  }
+}
+
+function updateCartCount() {
+  document.getElementById('cart-count').textContent = cart.length;
+}
+
+// Add to Wishlist function
+function addToWishlist(productName) {
+  if (!wishlist.includes(productName)) {
+    wishlist.push(productName);
+    updateWishlistCount();
+    alert(`${productName} added to wishlist.`);
+  } else {
+    alert(`${productName} is already in wishlist.`);
+  }
+}
+
+function updateWishlistCount() {
+  document.getElementById('wishlist-count').textContent = wishlist.length;
+}
+
 // Order form submit
 document.getElementById('order-form').addEventListener('submit', function (e) {
   e.preventDefault();
-  document.getElementById('order-confirm').classList.remove('hidden');
-  this.reset();
+  const product = document.getElementById('order-product').value;
+  if (product) {
+    alert(`✅ Order placed for: ${product}`);
+    this.reset();
+    document.getElementById('order-confirm').classList.remove('hidden');
+  } else {
+    alert("❌ Please select a product to order.");
+  }
 });
 
 // Return form submit
 document.getElementById('return-form').addEventListener('submit', function (e) {
   e.preventDefault();
-  document.getElementById('return-confirm').classList.remove('hidden');
+  alert(`♻️ Return request submitted.`);
   this.reset();
+  document.getElementById('return-confirm').classList.remove('hidden');
 });
