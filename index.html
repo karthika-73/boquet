@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sustainable Fashion Boutique</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -12,50 +12,35 @@
     <h1>🌿 Sustainable Fashion Boutique</h1>
     <p>Eco-friendly, upcycled & recycled fashion for a better world</p>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Products</a>
-      <a href="#">About</a>
-      <a href="#">Return</a>
-      <span>🛒 Cart (0) | ❤️ Wishlist (0)</span>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#return">Return</a>
     </nav>
   </header>
 
   <main>
-    <section class="welcome">
+    <section id="home" class="welcome">
       <h2>Welcome to Our Boutique</h2>
-      <p>Discover our latest collection of sustainable fashion items that never go out of style.</p>
+      <p>Discover stylish sustainable fashion made with love for the planet.</p>
     </section>
 
-    <section class="collection">
+    <section id="products" class="collection">
       <h3>Our Collection</h3>
-      <div class="filters">
-        <select>
-          <option>All Categories</option>
-          <option>Dresses</option>
-          <option>Bags</option>
-          <option>Shoes</option>
-        </select>
-      </div>
-
       <div class="products" id="product-list">
-        <!-- Products will be rendered here using JavaScript -->
+        <!-- JS will load products here -->
       </div>
     </section>
 
-    <section class="wishlist">
-      <h3>My Wishlist</h3>
-      <p id="wishlist-msg">Wishlist is empty</p>
-    </section>
-
-    <section class="about">
+    <section id="about" class="about">
       <h3>About Us</h3>
-      <p>Our boutique is committed to reducing fashion waste and promoting eco-friendly choices.</p>
+      <p>We are committed to reducing fashion waste and creating eco-conscious clothing choices for all. Join us in making fashion green again.</p>
     </section>
 
-    <section class="order">
+    <section id="order" class="order">
       <h3>Place Your Order</h3>
       <form id="order-form">
-        <input type="text" placeholder="Product Name" required />
+        <input type="text" id="order-product" placeholder="Product Name" required readonly />
         <input type="text" placeholder="Your Name" required />
         <input type="text" placeholder="Phone Number" required />
         <select required>
@@ -65,9 +50,10 @@
         </select>
         <button type="submit">Place Order</button>
       </form>
+      <p id="order-confirm" class="hidden">✅ Order placed successfully!</p>
     </section>
 
-    <section class="return">
+    <section id="return" class="return">
       <h3>Return for Recycling</h3>
       <form id="return-form">
         <input type="text" placeholder="Your Name" required />
@@ -75,6 +61,7 @@
         <input type="text" placeholder="Product Details" required />
         <button type="submit">Send</button>
       </form>
+      <p id="return-confirm" class="hidden">♻️ Return request submitted!</p>
     </section>
   </main>
 
